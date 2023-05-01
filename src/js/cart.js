@@ -14,8 +14,6 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
-  // const quantity = item.quantity ? item.quantity : 1;
-  // const totalPrice = item.totalPrice ? item.totalPrice : item.FinalPrice;
   const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
       <img
