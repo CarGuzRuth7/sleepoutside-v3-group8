@@ -9,7 +9,9 @@ function renderCartContents() {
     const total = cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
     const cartFooter = document.querySelector(".cart-footer");
     cartFooter.classList.remove("hide");
-    cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+    cartFooter.querySelector(
+      ".cart-total"
+    ).textContent = `Total: $${total.toFixed(2)}`;
   }
 }
 
