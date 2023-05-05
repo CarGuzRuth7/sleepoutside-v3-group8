@@ -3,7 +3,6 @@ import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 
 export default async function productDetails(productId) {
-    // findProductById(productId).then((product) => {
     const product = await findProductById(productId);
     renderProductDetails(product);
 }
@@ -26,7 +25,7 @@ function renderProductDetails(product){
     document.querySelector("#productImage").src = product.Image; 
     document.querySelector("#productImage").alt = product.Name;
     document.querySelector("#productFinalPrice").innerHTML = product.FinalPrice;
-    document.querySelector("#productColorName").innerHTML = product.Colors.ColorName;
+    document.querySelector("#productColorName").innerHTML = product.Colors[0].ColorName;
     document.querySelector("#productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
     document.querySelector("#addToCart").dataset.id = product.Id
     document.getElementById("addToCart").addEventListener("click", addProductToCart(product))
