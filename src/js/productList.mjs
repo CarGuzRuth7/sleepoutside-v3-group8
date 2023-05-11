@@ -17,21 +17,20 @@ function productCardTemplate(product){
 
 }
 
-export default async function productList(selector, category){
-    // get the element we will insert the list into from the selector
-    // get the list of products 
-    // render out the product list to the element
-    
-    let elem = document.querySelector(selector);
-    let productLst = await getData(category); 
-    renderListWithTemplate(productCardTemplate, elem, productLst, "afterbegin", false);
+export default async function productList(selector, category) {
+  // get the element we will insert the list into from the selector
+  // get the list of products 
+  // render out the product list to the element
+  let elem = document.querySelector(selector);
+  let productLst = await getData(category);
 
-   
+  function filterResults(arr) {
+    // Define an array of product IDs we want to keep
+    const usedIds = ["880RR", "985RF", "985PR", "344YJ"];
+    // Filter the array of products to only include products with the desired IDs
+    return arr.filter((item) => usedIds.includes(item.Id));
+  }
+  productLst = filterResults(productLst);
+  renderListWithTemplate(productCardTemplate, elem, productLst, "afterbegin", false);
 }
 
-// function renderList(list, elem){
-
-//     const listProduct = list.map((item) => productCardTemplate(item));
-//     elem.insertAdjacentHTML("afterbegin", listProduct.join(""));
-     
-// }
