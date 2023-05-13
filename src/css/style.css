@@ -119,14 +119,16 @@ button {
 /*animation to cart*/
 .num-items {
   position: absolute;
-  top: 0;
+  top: 2px;
   right: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
-  padding: 5px;
+  padding: 2px;
   background-color: var(--primary-color);
   color: #000;
   border-radius: 50%;
+  width: 20px;
+  height: 20px;
 }
 
 /* End cart icon styles */
