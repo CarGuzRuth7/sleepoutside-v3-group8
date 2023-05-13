@@ -17,6 +17,10 @@ function addProductToCart(product) {
       cart[index].totalPrice = cart[index].quantity * product.FinalPrice;
     }
     setLocalStorage("so-cart", cart);
+
+    //add cart length to icon backpack
+    document.querySelector(".num-items").innerHTML = cart.length;
+
 }
 
 function renderProductDetails(product){

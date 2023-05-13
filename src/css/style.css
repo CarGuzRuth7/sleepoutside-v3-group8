@@ -102,12 +102,31 @@ button {
   position: relative;
   text-align: center;
 }
+.cart:hover,
+#addToCart:hover {
+  opacity: 0.7;
+}
+.cart a {
+  text-decoration: none;
+}
 
 .cart svg {
   width: 25px;
 }
 .cart:hover svg {
   fill: gray;
+}
+/*animation to cart*/
+.num-items {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: var(--primary-color);
+  color: #000;
+  border-radius: 50%;
 }
 
 /* End cart icon styles */
@@ -136,7 +155,7 @@ button {
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
-  margin: 0.25em;
+  margin: 0.3em;
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
@@ -145,6 +164,11 @@ button {
 .product-card h3,
 .product-card p {
   margin: 0.5em 0;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+  box-shadow: 1px 1px 10px var(--primary-color);
 }
 
 .card__brand {
