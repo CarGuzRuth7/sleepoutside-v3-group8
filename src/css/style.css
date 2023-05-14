@@ -117,6 +117,29 @@ button {
   fill: gray;
 }
 /*animation to cart*/
+
+.add-to-cart {
+  animation-name: cartlist;
+  animation-duration: 2s;
+}
+@keyframes cartlist {
+  33% {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+  66% {
+    width: 35px;
+    height: 35px;
+    font-size: 30px;
+  }
+  100% {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+}
+
 .num-items {
   position: absolute;
   top: 2px;

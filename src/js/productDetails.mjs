@@ -19,7 +19,17 @@ function addProductToCart(product) {
     setLocalStorage("so-cart", cart);
 
     //add cart length to icon backpack
-    document.querySelector(".num-items").innerHTML = cart.length;
+    let cartNumber = document.querySelector(".num-items");
+    cartNumber.innerHTML = cart.length;
+    //toggle classes to animate the cart
+    function toggleCartClass(number){
+      number.classList.add("add-to-cart");
+      setTimeout(()=>{number.classList.remove("add-to-cart")}, 5000)
+
+    }
+    toggleCartClass(cartNumber)
+    
+     
 
 }
 
