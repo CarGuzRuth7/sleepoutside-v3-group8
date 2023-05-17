@@ -8,9 +8,9 @@ export default async function productDetails(productId) {
 }
 
 function addProductToCart(product) {
-    const cart = getLocalStorage("so-cart") || [];
+    const cart = getLocalStorage("so-cart");
     const index = cart.findIndex((item) => item.Id === product.Id);
-    if (index === -1) {
+    if (index === 0) {
       cart.push({ ...product, quantity: 1, totalPrice: product.FinalPrice });
     } else {
       cart[index].quantity += 1;
