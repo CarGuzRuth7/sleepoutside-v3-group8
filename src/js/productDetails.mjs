@@ -17,6 +17,17 @@ function addProductToCart(product) {
       cart[index].totalPrice = cart[index].quantity * product.FinalPrice;
     }
     setLocalStorage("so-cart", cart);
+
+    //add cart length to icon backpack
+    let cartNumber = document.querySelector(".num-items");
+    cartNumber.innerHTML = cart.length;
+    //toggle classes to animate the cart
+    function toggleCartClass(number){
+      number.classList.add("add-to-cart");
+      setTimeout(()=>{number.classList.remove("add-to-cart")}, 5000)
+    }
+    toggleCartClass(cartNumber);
+
 }
 
 function renderProductDetails(product){
@@ -27,6 +38,6 @@ function renderProductDetails(product){
     document.querySelector("#productFinalPrice").innerHTML = product.FinalPrice;
     document.querySelector("#productColorName").innerHTML = product.Colors[0].ColorName;
     document.querySelector("#productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
-    document.querySelector("#addToCart").dataset.id = product.Id
-    document.getElementById("addToCart").addEventListener("click", addProductToCart(product))
+    document.querySelector("#addToCart").dataset.id = product.Id;
+    document.querySelector("#addToCart").addEventListener("click", () => addProductToCart(product));
 }

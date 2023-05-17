@@ -13,6 +13,8 @@ function renderCartContents() {
       ".cart-total"
     ).textContent = `Total: $${total.toFixed(2)}`;
   }
+  //add cart length to icon backpack
+  document.querySelector(".num-items").innerHTML = cartItems.length;
 }
 
 function cartItemTemplate(item) {
