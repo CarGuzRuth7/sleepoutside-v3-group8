@@ -40,4 +40,5 @@ function renderProductDetails(product){
     document.querySelector("#productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
     document.querySelector("#addToCart").dataset.id = product.Id;
     document.querySelector("#addToCart").addEventListener("click", () => addProductToCart(product));
+    document.title = `Sleep Outside | ${product.NameWithoutBrand}`;
 }
