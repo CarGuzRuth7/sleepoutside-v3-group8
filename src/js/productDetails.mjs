@@ -8,9 +8,9 @@ export default async function productDetails(productId) {
 }
 
 function addProductToCart(product) {
-    const cart = getLocalStorage("so-cart");
+    const cart = getLocalStorage("so-cart") || [];
     const index = cart.findIndex((item) => item.Id === product.Id);
-    if (index === 0) {
+    if (index === -1) {
       cart.push({ ...product, quantity: 1, totalPrice: product.FinalPrice });
     } else {
       cart[index].quantity += 1;
@@ -25,11 +25,8 @@ function addProductToCart(product) {
     function toggleCartClass(number){
       number.classList.add("add-to-cart");
       setTimeout(()=>{number.classList.remove("add-to-cart")}, 5000)
-
     }
-    toggleCartClass(cartNumber)
-    
-     
+    toggleCartClass(cartNumber);
 
 }
 
@@ -41,6 +38,6 @@ function renderProductDetails(product){
     document.querySelector("#productFinalPrice").innerHTML = product.FinalPrice;
     document.querySelector("#productColorName").innerHTML = product.Colors[0].ColorName;
     document.querySelector("#productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
-    document.querySelector("#addToCart").dataset.id = product.Id
-    document.getElementById("addToCart").addEventListener("click", addProductToCart(product))
+    document.querySelector("#addToCart").dataset.id = product.Id;
+    document.querySelector("#addToCart").addEventListener("click", () => addProductToCart(product));
 }
