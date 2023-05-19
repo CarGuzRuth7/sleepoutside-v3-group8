@@ -42,9 +42,8 @@ export async function renderWithTemplate(templateFn, parentElement, data, callba
   if (clear){
     parentElement.innerHTML = "";
   }
-  const html = await templateFn(); 
+  const html = await templateFn(data); 
   parentElement.insertAdjacentHTML(position, html);
-  console.log(html)
   
   if(callback){
     callback(data);
@@ -62,8 +61,8 @@ export function loadTemplate(path) {
 } 
 
 export async function loadHeaderFooter(){
-  const headerTemplateFn = loadTemplate("./partials/header.html");
-  const footerTemplateFn = loadTemplate("./partials/footer.html");
+  const headerTemplateFn = loadTemplate("../public/partials/header.html");
+  const footerTemplateFn = loadTemplate("../public/partials/footer.html");
   const headerEl = document.querySelector("header");
   const footerEl = document.querySelector("footer");
   renderWithTemplate(headerTemplateFn, headerEl);
