@@ -246,6 +246,19 @@ button {
   grid-column: 3;
 }
 
+.remove-item {
+  grid-row: 1;
+  grid-column: 5;
+  color: red;
+  border: 1px solid black;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.remove-item:hover{
+  color: var(--secondary-color);
+}
+
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
