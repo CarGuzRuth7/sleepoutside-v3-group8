@@ -60,7 +60,7 @@ function cartItemTemplate(item) {
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: ${item.quantity} <span id="remove-item" data-id="${item.Id}">X</span></p>
+      <p class="cart-card__quantity">qty: ${item.quantity}</p>
       <p class="cart-card__price">$${item.totalPrice.toFixed(2)}</p>
       <span class="remove-item" data-id="${item.Id}">X</span>
     </li>`;
