@@ -255,7 +255,7 @@ button {
   cursor: pointer;
 }
 
-.remove-item:hover{
+.remove-item:hover {
   color: var(--secondary-color);
 }
 
