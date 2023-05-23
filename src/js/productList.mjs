@@ -14,7 +14,6 @@ function productCardTemplate(product){
     >
   </li>`
   return template
-
 }
 
 export default async function productList(selector, category) {

@@ -187,10 +187,13 @@ button {
 }
 .product-card h2,
 .product-card h3,
-.product-card p {
+.product-card p,
+.products h2 {
   margin: 0.5em 0;
 }
-
+.products h2 {
+  text-align: center;
+}
 .product-card:hover {
   transform: scale(1.03);
   box-shadow: 1px 1px 10px var(--primary-color);

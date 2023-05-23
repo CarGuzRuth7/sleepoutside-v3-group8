@@ -61,8 +61,8 @@ export function loadTemplate(path) {
 } 
 
 export async function loadHeaderFooter(){
-  const headerTemplateFn = loadTemplate("../public/partials/header.html");
-  const footerTemplateFn = loadTemplate("../public/partials/footer.html");
+  const headerTemplateFn = loadTemplate("/partials/header.html");
+  const footerTemplateFn = loadTemplate("/partials/footer.html");
   const headerEl = document.querySelector("header");
   const footerEl = document.querySelector("footer");
   renderWithTemplate(headerTemplateFn, headerEl);
