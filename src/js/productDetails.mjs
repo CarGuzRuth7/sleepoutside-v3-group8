@@ -9,7 +9,7 @@ export default async function productDetails(productId) {
 
 function addProductToCart(product) {
     const cart = getLocalStorage("so-cart") || [];
-    let totalItems = 0
+    // let totalItems = 0
     const index = cart.findIndex((item) => item.Id === product.Id);
     if (index === -1) {
       cart.push({ ...product, quantity: 1, totalPrice: product.FinalPrice });
@@ -38,7 +38,6 @@ function addProductToCart(product) {
     //   number.classList.add("add-to-cart");
     //   setTimeout(()=>{number.classList.remove("add-to-cart")}, 5000)
     // }
-    
 
 }
 
