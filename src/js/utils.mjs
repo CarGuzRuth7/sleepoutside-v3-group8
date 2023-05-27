@@ -1,3 +1,5 @@
+import { doc } from "prettier";
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -44,7 +46,7 @@ export async function renderWithTemplate(templateFn, parentElement, data, callba
   }
   const html = await templateFn(data); 
   parentElement.insertAdjacentHTML(position, html);
-  
+//  console.log(parentElement.innerHTML)
   if(callback){
     callback(data);
   }
@@ -67,4 +69,42 @@ export async function loadHeaderFooter(){
   const footerEl = document.querySelector("footer");
   renderWithTemplate(headerTemplateFn, headerEl);
   renderWithTemplate(footerTemplateFn, footerEl);
+  displayTotalItems()
+}
+
+
+//WRITE A FUNCTION TO GET TOTAL-ITEMS FROM LOCAL STORAGE. 
+
+export function displayTotalItems(){
+  //
+  const cartStorage = getLocalStorage("so-cart") || []
+  //displays totals items from the cart (backpack) on each view
+  const header = document.querySelector("header");
+  const div = document.createElement("div")
+  const cartNumber = document.createElement("span");
+  let totalItems = getLocalStorage("total-items");
+
+
+  
+ // console.log(cartStorage)
+
+
+  div.classList.add("script-num")
+  cartNumber.classList.add("num-items");
+  cartNumber.innerHTML = totalItems;
+
+  div.appendChild(cartNumber);
+  header.appendChild(div)
+
+  toggleCartClass(cartNumber);
+
+ 
+}
+
+ // 
+ export function toggleCartClass(number){
+  //toggle num-items classes to animate the cart
+  //const number = document.querySelector("num-items");
+  number.classList.add("add-to-cart");
+  setTimeout(()=>{number.classList.remove("add-to-cart")}, 5000)
 }

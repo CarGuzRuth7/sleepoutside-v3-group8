@@ -11,6 +11,16 @@ export default function ShoppingCart() {
     const cartFooter = document.querySelector(".cart-footer");
     cartFooter.classList.remove("hide");
     cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+
+    //retrive quantity and store sum total in localStorage
+    let totalQuantity = document.querySelectorAll(".num-quantity");
+    let sum = 0
+    for (var i = 0; i < totalQuantity.length; i++) {
+    var itemTotal = Number(totalQuantity[i].innerHTML);
+    sum = sum + itemTotal
+    }
+    setLocalStorage("total-items", sum);
+
   }
 
   cartEl.addEventListener("click", handleRemoveItem);
@@ -60,7 +70,7 @@ function cartItemTemplate(item) {
         <h2 class="card__name">${item.Name}</h2>
       </a>
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: ${item.quantity}</p>
+      <p class="cart-card__quantity">qty: <span class="num-quantity">${item.quantity}</span></p>
       <p class="cart-card__price">$${item.totalPrice.toFixed(2)}</p>
       <span class="remove-item" data-id="${item.Id}">X</span>
     </li>`;
