@@ -217,6 +217,26 @@ button {
 .product-detail img {
   width: 100%;
 }
+#discountPercentage{
+  background-color: var(--secondary-color);
+  color: white;
+  padding: .5rem;
+  border-radius: .5rem;
+  width: max-content;
+}
+#discountProduct{
+  color: red;
+  text-decoration: line-through;
+}
+#productFinalPrice{
+  color: var(--secondary-color);
+  font-size: x-large;
+  margin-left: 1rem;
+}
+
+.product-card__price{
+  display: flex;
+}
 
 /* Start cart list card styles */
 .cart-card {

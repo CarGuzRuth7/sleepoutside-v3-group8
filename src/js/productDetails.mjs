@@ -41,11 +41,21 @@ function addProductToCart(product) {
 
 }
 
+export function calculateDiscountPercentage(product) {
+  const originalPrice = product.SuggestedRetailPrice;
+  const discountedPrice = product.FinalPrice;
+  const discountPercentage = ((originalPrice - discountedPrice) / originalPrice) * 100;
+  product.discountPercentage = discountPercentage.toFixed(0);
+}
+
 function renderProductDetails(product){
+    calculateDiscountPercentage(product);
     document.querySelector("#productName").innerHTML = product.Brand.Name;
     document.querySelector("#productNameWithoutBrand").innerHTML = product.NameWithoutBrand;
-    document.querySelector("#productImage").src = product.Images.PrimaryLarge; 
+    document.querySelector("#productImage").src = product.Images.PrimaryExtraLarge; 
     document.querySelector("#productImage").alt = product.Name;
+    document.querySelector("#discountPercentage").innerHTML = `- ${product.discountPercentage}%`
+    document.querySelector("#discountProduct").innerHTML = `$${product.SuggestedRetailPrice}`;
     document.querySelector("#productFinalPrice").innerHTML = `$${product.FinalPrice}`;
     document.querySelector("#productColorName").innerHTML = product.Colors[0].ColorName;
     document.querySelector("#productDescriptionHtmlSimple").innerHTML = product.DescriptionHtmlSimple;
