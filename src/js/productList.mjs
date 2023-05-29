@@ -1,17 +1,20 @@
 import {getData} from "./productData.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
+import { calculateDiscountPercentage } from "./productDetails.mjs";
 
 function productCardTemplate(product){
+  calculateDiscountPercentage(product);
     const template = `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
       <img
-        src="${product.Images.PrimaryMedium}"
+        src="${product.Images.PrimaryLarge}"
         alt="${product.Name}"
       />
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.Name}</h2>
-      <p class="product-card__price">$${product.FinalPrice}</p></a
-    >
+      <p class="discountPercentage-product" id="discountPercentage">- ${product.discountPercentage}%</p>
+      <p class="product-card__price"> <span id="discountProduct">$${product.SuggestedRetailPrice}</span> <span id="productFinalPrice">$${product.FinalPrice}</span></p>
+      </a>
   </li>`
   return template
 }
@@ -23,13 +26,5 @@ export default async function productList(selector, category) {
   let elem = document.querySelector(selector);
   let productLst = await getData(category);
 
-  function filterResults(arr) {
-    // Define an array of product IDs we want to keep
-    const usedIds = ["880RR", "985RF", "985PR", "344YJ"];
-    // Filter the array of products to only include products with the desired IDs
-    return arr.filter((item) => usedIds.includes(item.Id));
-  }
-  productLst = filterResults(productLst);
   renderListWithTemplate(productCardTemplate, elem, productLst, "afterbegin", false);
 }
-
