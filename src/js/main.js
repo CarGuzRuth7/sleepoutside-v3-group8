@@ -3,9 +3,9 @@ import { loadHeaderFooter, displayTotalItems } from "./utils.mjs";
 import Alert from "./Alert.js";
 
 // loadHeaderFooter();
-//calls random alert messages
 loadHeaderFooter(() => {
-  // Callback function will be executed after the template rendering is complete
+  // callback function will be executed after the template rendering is complete
   displayTotalItems();
 });
+//calls random alert messages
 Alert();

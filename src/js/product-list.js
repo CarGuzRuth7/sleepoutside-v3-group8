@@ -1,7 +1,10 @@
 import productList from "./productList.mjs";
-import { getParam, loadHeaderFooter } from "./utils.mjs";
+import { getParam, loadHeaderFooter, displayTotalItems } from "./utils.mjs";
 
-loadHeaderFooter();
+loadHeaderFooter(() => {
+  // callback function will be executed after the template rendering is complete
+  displayTotalItems();
+});
 const productId = getParam("product");
 productList(".product-list", productId);
 
