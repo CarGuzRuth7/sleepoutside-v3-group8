@@ -1,5 +1,5 @@
 import { findProductById } from "./productData.mjs";
-import { setLocalStorage, getLocalStorage, displayTotalItems } from "./utils.mjs"; 
+import { setLocalStorage, getLocalStorage, displayTotalItems} from "./utils.mjs"; 
 
 
 export default async function productDetails(productId) {
@@ -16,7 +16,8 @@ function addProductToCart(product) {
       cart[index].quantity += 1;
       cart[index].totalPrice = cart[index].quantity * product.FinalPrice;
     }
-    setLocalStorage("so-cart", cart);    
+    setLocalStorage("so-cart", cart);
+    displayTotalItems();    
 
 }
 

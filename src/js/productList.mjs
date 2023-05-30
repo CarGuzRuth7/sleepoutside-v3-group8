@@ -22,14 +22,6 @@ export default async function productList(selector, category) {
   // render out the product list to the element
   let elem = document.querySelector(selector);
   let productLst = await getData(category);
-
-  function filterResults(arr) {
-    // Define an array of product IDs we want to keep
-    const usedIds = ["880RR", "985RF", "985PR", "344YJ"];
-    // Filter the array of products to only include products with the desired IDs
-    return arr.filter((item) => usedIds.includes(item.Id));
-  }
-  productLst = filterResults(productLst);
   renderListWithTemplate(productCardTemplate, elem, productLst, "afterbegin", false);
 }
 

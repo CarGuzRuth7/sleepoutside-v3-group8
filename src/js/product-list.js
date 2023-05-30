@@ -1,7 +1,6 @@
 import productList from "./productList.mjs";
 import { getParam, loadHeaderFooter } from "./utils.mjs";
 
-
 loadHeaderFooter();
 const productId = getParam("product");
 productList(".product-list", productId);

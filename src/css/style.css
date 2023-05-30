@@ -121,42 +121,40 @@ button {
 .add-to-cart {
   animation-name: cartlist;
   animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
 @keyframes cartlist {
   33% {
     width: 20px;
     height: 20px;
-    font-size: 14px;
+    font-size: 15px;
   }
   66% {
-    width: 35px;
+    width: 40px;
     height: 35px;
     font-size: 30px;
   }
   100% {
     width: 20px;
     height: 20px;
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
-.script-num{
+.script-num {
   position: absolute;
-  top: -7px;
-  right: 0;
-  padding: 10px;
- 
-  
+  top: 8px;
+  left: 14px; 
 }
 .num-items {
   font-size: 14px;
   font-weight: bold;
-  padding: 4px;
   background-color: var(--primary-color);
   color: #000;
   border-radius: 50%;
-
+  padding: 5px;
 }
+
 
 /* End cart icon styles */
 
@@ -276,29 +274,27 @@ button {
 }
 
 /*ALERT MESSAGES FROM PRODUCT LIST*/
-.alert-list{
+.alert-list {
   position: fixed;
-  top: 3rem;
-  left: 2rem;
-  right: 2rem;
+  top: 40%;
+  left: 50%;
   text-align: center;
- 
+  transform: translate(-50%, -50%);
 }
 .alert-list p {
   border-radius: 10px;
   box-shadow: 5px 5px 10px #303030;
   padding: 3rem;
-
 }
-.close-btn{
+.close-btn {
   position: absolute;
-  top: 15px;
+  top: 20px;
   right: 10px;
   padding: 0;
   background-color: transparent;
   text-shadow: 1px 1px 3px #000;
 }
-.close-btn:hover{
+.close-btn:hover {
   color: #000;
 }
 
@@ -314,12 +310,8 @@ button {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
-  .alert-list{
-     max-width: 500px; 
-     top: 1.5rem;
-     left: 30%;
-     right: 30%;
-   
+  .alert-list {
+    max-width: 500px;
   }
 }
 

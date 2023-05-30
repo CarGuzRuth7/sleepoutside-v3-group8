@@ -1,5 +1,3 @@
-import { doc } from "prettier";
-
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -76,29 +74,28 @@ export async function loadHeaderFooter(){
 //WRITE A FUNCTION TO GET TOTAL-ITEMS FROM LOCAL STORAGE. 
 
 export function displayTotalItems(){
-  //
   const cartStorage = getLocalStorage("so-cart") || []
-  //displays totals items from the cart (backpack) on each view
-  const header = document.querySelector("header");
-  const div = document.createElement("div")
-  const cartNumber = document.createElement("span");
-  let totalItems = getLocalStorage("total-items");
+  // console.log(cartStorage)
+  //displays totals items from the cart (backpack) on each view  
+  const cartItems = document.querySelector(".num-items");
 
+  // calculate the total number of items in the cart by summing up the quantity of each item
+  let totalItems = cartStorage.reduce((accumulator, item) => accumulator + item.quantity, 0)
+  // console.log(totalItems)
+  if (cartItems) {
+    cartItems.textContent = totalItems;
+    toggleCartClass(cartItems);
 
-  
+    if (cartStorage.length === 0) {
+      cartItems.style.display = "none";
+    } else {
+      cartItems.style.display = "inline-block";
+    }
+  }
+
  // console.log(cartStorage)
-
-
-  div.classList.add("script-num")
-  cartNumber.classList.add("num-items");
-  cartNumber.innerHTML = totalItems;
-
-  div.appendChild(cartNumber);
-  header.appendChild(div)
-
-  toggleCartClass(cartNumber);
-
- 
+  cartItems.innerHTML = totalItems;
+  toggleCartClass(cartItems);
 }
 
  // 

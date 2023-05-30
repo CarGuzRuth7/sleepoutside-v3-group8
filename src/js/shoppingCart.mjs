@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, renderListWithTemplate } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, renderListWithTemplate, displayTotalItems } from "./utils.mjs";
 
 export default function ShoppingCart() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -32,11 +32,11 @@ export default function ShoppingCart() {
       const index = cartItems.findIndex((item) => item.Id === productId);
       if (index !== -1) {
         if (cartItems[index].quantity > 1) {
-          // If the quantity is greater than 1, reduce the quantity by 1
+          // if the quantity is greater than 1, reduce the quantity by 1
           cartItems[index].quantity -= 1;
           cartItems[index].totalPrice = cartItems[index].quantity * cartItems[index].FinalPrice;
 
-          // Update the quantity and price elements for the removed item
+          // update the quantity and price elements for the removed item
           const itemToUpdate = event.target.parentNode;
           itemToUpdate.querySelector(".cart-card__quantity").textContent = `qty: ${cartItems[index].quantity}`;
           itemToUpdate.querySelector(".cart-card__price").textContent = `$${cartItems[index].totalPrice.toFixed(2)}`;
@@ -46,13 +46,15 @@ export default function ShoppingCart() {
           const itemToRemove = event.target.closest("li.cart-card");
           itemToRemove.parentNode.removeChild(itemToRemove);
         }
-        // Update the cart in local storage with the modified cart items
+        // update the cart in local storage with the modified cart items
         setLocalStorage("so-cart", cartItems);
-        // Recalculate and update the total after removing the item
+        // recalculate and update the total after removing the item
         const total = cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
         const cartFooter = document.querySelector(".cart-footer");
         cartFooter.classList.remove("hide");
         cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+
+        displayTotalItems();
       }
     }
   }
