@@ -60,19 +60,17 @@ export function loadTemplate(path) {
   };
 } 
 
-export async function loadHeaderFooter(){
+export async function loadHeaderFooter(callback){ // added a callback to pass displayTotalItems after the template is rendered
   const headerTemplateFn = loadTemplate("/partials/header.html");
   const footerTemplateFn = loadTemplate("/partials/footer.html");
   const headerEl = document.querySelector("header");
   const footerEl = document.querySelector("footer");
-  renderWithTemplate(headerTemplateFn, headerEl);
-  renderWithTemplate(footerTemplateFn, footerEl);
+  renderWithTemplate(headerTemplateFn, headerEl, null, null, "afterbegin", true);
+  renderWithTemplate(footerTemplateFn, footerEl, null, callback, "afterbegin", true);
   displayTotalItems()
 }
 
-
 //WRITE A FUNCTION TO GET TOTAL-ITEMS FROM LOCAL STORAGE. 
-
 export function displayTotalItems(){
   const cartStorage = getLocalStorage("so-cart") || []
   // console.log(cartStorage)
@@ -83,22 +81,17 @@ export function displayTotalItems(){
   let totalItems = cartStorage.reduce((accumulator, item) => accumulator + item.quantity, 0)
   // console.log(totalItems)
   if (cartItems) {
-    cartItems.textContent = totalItems;
+    cartItems.innerHTML = totalItems;
     toggleCartClass(cartItems);
 
     if (cartStorage.length === 0) {
       cartItems.style.display = "none";
     } else {
       cartItems.style.display = "inline-block";
-    }
+    } 
   }
-
- // console.log(cartStorage)
-  cartItems.innerHTML = totalItems;
-  toggleCartClass(cartItems);
 }
-
- // 
+ 
  export function toggleCartClass(number){
   //toggle num-items classes to animate the cart
   //const number = document.querySelector("num-items");
