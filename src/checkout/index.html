@@ -18,6 +18,54 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form action="http://server-nodejs.cit.byui.edu:3000/checkout" method="post" id="checkout-form">
+          <fieldset>
+            <legend>Shipping</legend>
+            <label>
+              First name
+              <input type="text" name="customerfName" required>
+            </label>
+            <label>
+              Last name
+              <input type="text" name="customerlName" required>
+            </label>
+            <label>
+              Street
+              <input type="text" name="customerStreet" required>
+            </label>
+            <label>
+              City
+              <input type="text" name="customerCity" required>
+            </label>
+            <label>
+              State
+              <input type="text" name="customerState" required>
+            </label>
+            <label>
+              Zip
+              <input type="text" name="customerZip" required>
+            </label>
+          </fieldset>
+          <fieldset>
+            <legend>Payment</legend>
+            <label>
+              Card number
+            <input type="number" name="cardNumb">
+          </label>
+            <label>
+              Expiration
+            <input type="date" name="cardExp">
+          </label>
+            <label>
+              Security Code
+            <input type="number" name="cardCode">
+          </label>
+          </fieldset>
+          <fieldset>
+            <legend>Order Summary</legend>
+          </fieldset>
+          <input id="checkoutBtn" type="submit" name="submit" value="Checkout">
+        </form>
       </section>
     </main>
 

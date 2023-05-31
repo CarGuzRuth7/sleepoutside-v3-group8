@@ -80,8 +80,10 @@ header {
 .highlight {
   color: var(--tertiary-color);
 }
-
-button {
+label,input{
+  display: block;
+}
+button, #checkoutBtn {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -106,16 +108,19 @@ button {
 #addToCart:hover {
   opacity: 0.7;
 }
-.cart a {
+.cart a, .checkoutBtn{
   text-decoration: none;
 }
-
+#checkoutPage{
+  margin-bottom: 2rem;
+}
 .cart svg {
   width: 25px;
 }
 .cart:hover svg {
   fill: gray;
 }
+
 /*animation to cart*/
 
 .add-to-cart {
