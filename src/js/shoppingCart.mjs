@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, renderListWithTemplate, displayTotalItems } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, renderListWithTemplate} from "./utils.mjs";
 
 export default function ShoppingCart() {
   const cartItems = getLocalStorage("so-cart") || [];
