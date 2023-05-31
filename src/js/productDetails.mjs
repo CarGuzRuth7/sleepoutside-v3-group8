@@ -16,29 +16,8 @@ function addProductToCart(product) {
     } else {
       cart[index].quantity += 1;
       cart[index].totalPrice = cart[index].quantity * product.FinalPrice;
-
-       //add cart length to icon backpack
-    // let cartNumber = document.querySelector(".num-items");
-    // cartNumber.innerHTML = cart.length;
-   // totalItems = cart[index].quantity
-    // toggleCartClass(cartNumber);
-     //console.log(cart[index].quantity)
     }
     setLocalStorage("so-cart", cart);
-    
-    //totalItems.push(cart[index].quantity)
-    //add cart length to icon backpack
-    //  let cartNumber = document.querySelector(".num-items");
-    //  cartNumber.innerHTML = totalItems;
-    //  toggleCartClass(cartNumber);
-
-    // console.log(totalItems)
-    // //toggle classes to animate the cart
-    // function toggleCartClass(number){
-    //   number.classList.add("add-to-cart");
-    //   setTimeout(()=>{number.classList.remove("add-to-cart")}, 5000)
-    // }
-
 }
 
 export function calculateDiscountPercentage(product) {
