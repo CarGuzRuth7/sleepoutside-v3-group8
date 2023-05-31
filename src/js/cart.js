@@ -1,12 +1,8 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, displayTotalItems } from "./utils.mjs";
 import ShoppingCart from "./shoppingCart.mjs";
 
-loadHeaderFooter();
+loadHeaderFooter(() => {
+    // callback function will be executed after the template rendering is complete
+    displayTotalItems();
+});
 ShoppingCart();
-
-// let a = document.querySelectorAll(".cart-card__quantity")
-// for (var i = 0; i < a.length; i++) {
-//     var item = a[i];
-//     console.log(a[i].innerHTML)
-// }
-//console.log(a)

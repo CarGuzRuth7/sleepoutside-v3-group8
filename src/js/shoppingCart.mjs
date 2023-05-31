@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, renderListWithTemplate } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, renderListWithTemplate, displayTotalItems } from "./utils.mjs";
 
 export default function ShoppingCart() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -11,6 +11,16 @@ export default function ShoppingCart() {
     const cartFooter = document.querySelector(".cart-footer");
     cartFooter.classList.remove("hide");
     cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+
+    //retrive quantity and store sum total in localStorage
+    let totalQuantity = document.querySelectorAll(".num-quantity");
+    let sum = 0
+    for (var i = 0; i < totalQuantity.length; i++) {
+    var itemTotal = Number(totalQuantity[i].innerHTML);
+    sum = sum + itemTotal
+    }
+    setLocalStorage("total-items", sum);
+
   }
 
   cartEl.addEventListener("click", handleRemoveItem);

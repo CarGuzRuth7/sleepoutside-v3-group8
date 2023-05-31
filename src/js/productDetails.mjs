@@ -1,5 +1,5 @@
 import { findProductById } from "./productData.mjs";
-import { setLocalStorage, getLocalStorage } from "./utils.mjs"; 
+import { setLocalStorage, getLocalStorage, displayTotalItems} from "./utils.mjs"; 
 
 
 export default async function productDetails(productId) {
@@ -9,6 +9,7 @@ export default async function productDetails(productId) {
 
 function addProductToCart(product) {
     const cart = getLocalStorage("so-cart") || [];
+
     // let totalItems = 0
     const index = cart.findIndex((item) => item.Id === product.Id);
     if (index === -1) {
@@ -18,7 +19,9 @@ function addProductToCart(product) {
       cart[index].totalPrice = cart[index].quantity * product.FinalPrice;
     }
     setLocalStorage("so-cart", cart);
+    displayTotalItems();    
 }
+
 
 export function calculateDiscountPercentage(product) {
   const originalPrice = product.SuggestedRetailPrice;

@@ -1,9 +1,11 @@
 //import productList from "./productList.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, displayTotalItems } from "./utils.mjs";
+import Alert from "./Alert.js";
 
-//productList(".product-list", "tents");
-// add cart length to icon backpack
-// const cartItems = getLocalStorage("so-cart") || [];
-// document.querySelector(".num-items").innerHTML = cartItems.length;
-
-loadHeaderFooter();
+// loadHeaderFooter();
+loadHeaderFooter(() => {
+  // callback function will be executed after the template rendering is complete
+  displayTotalItems();
+});
+//calls random alert messages
+Alert();
