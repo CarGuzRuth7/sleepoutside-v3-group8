@@ -1,17 +1,20 @@
 import {getData} from "./productData.mjs";
-import { renderListWithTemplate} from "./utils.mjs";
+import { renderListWithTemplate } from "./utils.mjs";
+import { calculateDiscountPercentage } from "./productDetails.mjs";
 
 function productCardTemplate(product){
+  calculateDiscountPercentage(product);
     const template = `<li class="product-card">
     <a href="/product_pages/index.html?product=${product.Id}">
       <img
-        src="${product.Images.PrimaryMedium}"
+        src="${product.Images.PrimaryLarge}"
         alt="${product.Name}"
       />
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.Name}</h2>
-      <p class="product-card__price">$${product.FinalPrice}</p></a
-    >
+      <p class="discountPercentage-product" id="discountPercentage">- ${product.discountPercentage}%</p>
+      <p class="product-card__price"> <span id="discountProduct">$${product.SuggestedRetailPrice}</span> <span id="productFinalPrice">$${product.FinalPrice}</span></p>
+      </a>
   </li>`
   return template
 }
