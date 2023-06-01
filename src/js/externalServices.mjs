@@ -20,3 +20,16 @@ export async function findProductById(id) {
   const product = await convertToJson(response);
   return product.Result;
 }
+
+export async function checkOut(payload){
+  const url = "http://server-nodejs.cit.byui.edu:3000/checkout";
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  };
+  const response = await fetch(url, options);
+  return response.json();
+}
