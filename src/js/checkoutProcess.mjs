@@ -77,14 +77,38 @@ export default class checkoutProcess {
 }
 
   async checkout(form) {
-    // build the data object from the calculated fields, the items in the cart, and the information entered into the form
-    const jsonFormData = formDataToJSON(form);
-    jsonFormData.items = packageItems(this.list);
-    jsonFormData.orderTotal = this.orderTotal;
-    jsonFormData.shipping = this.shipping;
-    jsonFormData.tax = this.tax;
-    // call the checkout method in our externalServices module and send it our data object.
-    const checkoutBtn = document.querySelector("#checkoutBtn");
-    checkoutBtn.addEventListener("submit", )
+
+    const checkoutBtn = form.querySelector("#checkoutBtn");
+    // Attach the event listener to the button click event
+    checkoutBtn.addEventListener("click", event => {
+      event.preventDefault();
+
+      // build the data object from the calculated fields, the items in the cart, and the information entered into the form
+      const jsonFormData = formDataToJSON(form);
+      jsonFormData.items = packageItems(this.list);
+      jsonFormData.orderTotal = this.orderTotal;
+      jsonFormData.shipping = this.shipping;
+      jsonFormData.tax = this.tax;
+
+      // create the options object for the fetch request
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonFormData)
+      };
+
+      // make the POST request to the server using the externalServices module
+      externalServices.checkout("http://server-nodejs.cit.byui.edu:3000/checkout", options)
+        .then(response => {
+          // Process the server response (assuming it's JSON)
+          return response.json();
+        })
+        .then(data => {
+          // Handle the response data
+          console.log(data);
+        })
+    });
   }
 }
