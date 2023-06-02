@@ -49,7 +49,7 @@ export default class checkoutProcess {
     }
     
     this.itemTotal = subtotal;
-    this.displayOrderTotals;
+    this.displayOrderTotals();
   },
   calculateOrdertotal: function() {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
@@ -72,7 +72,16 @@ export default class checkoutProcess {
   },
   displayOrderTotals: function() {
     // once the totals are all calculated display them in the order summary page
-    
+    const orderInfo = form.elements.orderInfo;
+
+    const orderTemplate = `
+    <legend>Order Summary</legend>
+    <p>Item Total: ${this.itemTotal}</p>
+    <p>Shipping: ${this.shipping}</p>
+    <p>Tax: ${this.tax}</p>
+    <p>Order Total: ${this.orderTotal}</p>
+    `
+    orderInfo.innerHTML = orderTemplate;
   }
 }
 
