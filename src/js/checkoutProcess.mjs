@@ -1,4 +1,5 @@
 import { getLocalStorage } from "./utils.mjs"
+import { checkOut } from "./externalServices.mjs"
 
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement),
@@ -20,77 +21,58 @@ function packageItems(items) {
     quantity: item.quantity
   }));
 }
-console.log(packageItems(items))
 
-export default class checkoutProcess {
+export class CheckOutProcess {
+  constructor(key, outputSelector){
+    this.itemTotal = 0;
+    this.shipping = 0;
+    this.tax = 0;
+    this.orderTotal = 0;
+    this.key = key;
+    this.outputSelector = outputSelector;
+    this.list = getLocalStorage(key) || [];
+    this.calculateItemSummary();
+    this.calculateOrdertotal();
+  }
 
-  const checkoutProcess = {
-    key: "",
-    outputSelector: "",
-    list: [],
-    itemTotal: 0,
-    shipping: 0,
-    tax: 0,
-    orderTotal: 0,
-    init: function (key, outputSelector) {
-        this.key = key;
-        this.outputSelector = outputSelector;
-        this.list = getLocalStorage(key);
-        this.calculateItemSummary();
-    },
-  calculateItemSummary: function() {
+  calculateItemSummary() {
     // calculate and display the total amount of the items in the cart, and the number of items.
     let subtotal = 0;
     let itemCount = 0;
 
     for (const item of this.list) {
-      subtotal += item.price * item.quantity;
+      subtotal += item.FinalPrice * item.quantity;
       itemCount += item.quantity;
     }
-    
     this.itemTotal = subtotal;
-    this.displayOrderTotals();
-  },
-  calculateOrdertotal: function() {
-    // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
-    // if (this.itemTotal === 1){
-    //   const itemShipping = 10;
-    // } else {
-    //   const itemShipping = 
-    // }
-
+    this.displayOrderTotals(itemCount);
+  }
+  calculateOrdertotal() {
     const shippingPerItem = 2;
     const itemShipping = 10;
 
-    const shippingCost = itemShipping + (itemQuantity - 1) * shippingPerItem;
+    const shippingCost = itemShipping + (this.list.length - 1) * shippingPerItem;
     this.shipping = shippingCost;
     this.tax = this.itemTotal * 0.06;
     // display the totals.
     const orderTotal = this.itemTotal + shippingCost + this.tax;
     this.orderTotal = orderTotal;
     this.displayOrderTotals();
-  },
-  displayOrderTotals: function() {
+  }
+  displayOrderTotals() {
     // once the totals are all calculated display them in the order summary page
-    const orderInfo = form.elements.orderInfo;
+    const output = document.querySelector(this.outputSelector);
 
     const orderTemplate = `
     <legend>Order Summary</legend>
-    <p>Item Total: ${this.itemTotal}</p>
-    <p>Shipping: ${this.shipping}</p>
-    <p>Tax: ${this.tax}</p>
-    <p>Order Total: ${this.orderTotal}</p>
+    <p>Item Total: $${this.itemTotal}</p>
+    <p>Shipping: $${this.shipping}</p>
+    <p>Tax: $${this.tax.toFixed(2)}</p>
+    <p>Order Total: $${this.orderTotal.toFixed(2)}</p>
     `
-    orderInfo.innerHTML = orderTemplate;
+    output.innerHTML = orderTemplate;
   }
-}
-
   async checkout(form) {
-
-    const checkoutBtn = form.querySelector("#checkoutBtn");
-    // Attach the event listener to the button click event
-    checkoutBtn.addEventListener("click", event => {
-      event.preventDefault();
 
       // build the data object from the calculated fields, the items in the cart, and the information entered into the form
       const jsonFormData = formDataToJSON(form);
@@ -108,16 +90,13 @@ export default class checkoutProcess {
         body: JSON.stringify(jsonFormData)
       };
 
-      // make the POST request to the server using the externalServices module
-      externalServices.checkout("http://server-nodejs.cit.byui.edu:3000/checkout", options)
-        .then(response => {
-          // Process the server response (assuming it's JSON)
-          return response.json();
-        })
-        .then(data => {
-          // Handle the response data
-          console.log(data);
-        })
-    });
+      try {
+        // make the post request to the server
+        const response = await checkOut(options);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      };
   }
 }

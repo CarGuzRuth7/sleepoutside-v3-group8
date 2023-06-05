@@ -22,7 +22,7 @@ export async function findProductById(id) {
 }
 
 export async function checkOut(payload){
-  const url = "http://server-nodejs.cit.byui.edu:3000/checkout";
+  const url = `${baseURL}checkout`;
   const options = {
     method: "POST",
     headers: {

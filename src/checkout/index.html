@@ -18,52 +18,61 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
-        <form action="http://server-nodejs.cit.byui.edu:3000/checkout" method="post" id="checkout-form">
-          <fieldset>
+        <form method="post" id="checkout-form">
+          <fieldset name="shipping">
             <legend>Shipping</legend>
             <label>
               First name
-              <input type="text" name="fName" required>
+              <input type="text" name="fName" required />
             </label>
             <label>
               Last name
-              <input type="text" name="lName" required>
+              <input type="text" name="lName" required />
             </label>
             <label>
               Street
-              <input type="text" name="street" required>
+              <input type="text" name="street" required />
             </label>
             <label>
               City
-              <input type="text" name="city" required>
+              <input type="text" name="city" required />
             </label>
             <label>
               State
-              <input type="text" name="state" required>
+              <input type="text" name="state" required />
             </label>
             <label>
               Zip
-              <input type="text" name="zip" required>
+              <input type="text" name="zip" required />
             </label>
           </fieldset>
-          <fieldset>
+          <fieldset name="payment">
             <legend>Payment</legend>
             <label>
               Card number
-            <input type="number" name="cardNumber" placeholder="1234123412341234">
-          </label>
+              <input
+                type="number"
+                name="cardNumber"
+                placeholder="1234123412341234"
+                required
+              />
+            </label>
             <label>
               Expiration
-            <input type="date" name="expiration">
-          </label>
+              <input type="date" name="expiration" required />
+            </label>
             <label>
               Security Code
-            <input type="number" name="code" placeholder="123">
-          </label>
+              <input type="number" name="code" placeholder="123" required />
+            </label>
           </fieldset>
-          <fieldset name="orderInfo">
-          </fieldset>
-          <input id="checkoutBtn" type="submit" name="submit" value="Checkout">
+          <fieldset name="orderInfo"></fieldset>
+          <input
+            id="checkoutBtn"
+            type="submit"
+            name="submit"
+            value="Checkout"
+          />
         </form>
       </section>
     </main>
