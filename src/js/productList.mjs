@@ -1,4 +1,4 @@
-import {getData} from "./productData.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 import { calculateDiscountPercentage } from "./productDetails.mjs";
 
@@ -24,6 +24,6 @@ export default async function productList(selector, category) {
   // get the list of products 
   // render out the product list to the element
   let elem = document.querySelector(selector);
-  let productLst = await getData(category);
+  let productLst = await getProductsByCategory(category);
   renderListWithTemplate(productCardTemplate, elem, productLst, "afterbegin", false);
 }
