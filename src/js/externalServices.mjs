@@ -22,7 +22,7 @@ export async function findProductById(id) {
 }
 
 export async function checkOut(payload){
-  const url = `${baseURL}checkout`;
+  const url = `${baseURL}/checkout`;
   const options = {
     method: "POST",
     headers: {
