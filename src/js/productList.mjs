@@ -23,7 +23,7 @@ export default async function productList(selector, category) {
   // get the element we will insert the list into from the selector
   // get the list of products 
   // render out the product list to the element
-  let elem = document.querySelector(selector);
-  let productLst = await getProductsByCategory(category);
+  let elem = document.querySelector(selector); 
+  let productLst = await getData(category);
   renderListWithTemplate(productCardTemplate, elem, productLst, "afterbegin", false);
 }
