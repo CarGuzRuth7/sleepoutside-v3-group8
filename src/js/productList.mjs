@@ -1,6 +1,7 @@
 import { getProductsByCategory } from "./externalServices.mjs";
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate} from "./utils.mjs";
 import { calculateDiscountPercentage } from "./productDetails.mjs";
+import { generateBreadcrumb } from "./utils.mjs";
 
 function productCardTemplate(product){
   calculateDiscountPercentage(product);
@@ -26,4 +27,5 @@ export default async function productList(selector, category) {
   let elem = document.querySelector(selector);
   let productLst = await getProductsByCategory(category);
   renderListWithTemplate(productCardTemplate, elem, productLst, "afterbegin", false);
+  generateBreadcrumb(category, null, null);
 }

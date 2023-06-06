@@ -1,16 +1,16 @@
-import { findProductById } from "./externalServices.mjs";
+import { findProductById} from "./externalServices.mjs";
 import { setLocalStorage, getLocalStorage, displayTotalItems} from "./utils.mjs"; 
-
+import { generateBreadcrumb } from "./utils.mjs";
 
 export default async function productDetails(productId) {
     const product = await findProductById(productId);
     renderProductDetails(product);
+    generateBreadcrumb(product.Category, product.Name, productId);
 }
 
 function addProductToCart(product) {
     const cart = getLocalStorage("so-cart") || [];
 
-    // let totalItems = 0
     const index = cart.findIndex((item) => item.Id === product.Id);
     if (index === -1) {
       cart.push({ ...product, quantity: 1, totalPrice: product.FinalPrice });
@@ -21,7 +21,6 @@ function addProductToCart(product) {
     setLocalStorage("so-cart", cart);
     displayTotalItems();    
 }
-
 
 export function calculateDiscountPercentage(product) {
   const originalPrice = product.SuggestedRetailPrice;

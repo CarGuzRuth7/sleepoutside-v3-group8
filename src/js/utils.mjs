@@ -98,3 +98,38 @@ export function displayTotalItems(){
   number.classList.add("add-to-cart");
   setTimeout(()=>{number.classList.remove("add-to-cart")}, 5000)
 }
+
+export function generateBreadcrumb(category, productName, productId) {
+  const breadcrumbNav = document.querySelector(".breadcrumb-navigation");
+  const breadcrumbList = document.createElement("ul");
+  breadcrumbList.classList.add("breadcrumb-list"); 
+  const homeLink = createBreadcrumbLink("Home", "/index.html");
+  breadcrumbList.appendChild(homeLink);
+  
+
+  if (category) {
+    const categoryLink = createBreadcrumbLink(
+      category.replace("-", " ").charAt(0).toUpperCase() + category.replace("-", " ").slice(1),
+      `/product-list/index.html?product=${category}`,
+    );
+    breadcrumbList.appendChild(categoryLink);
+  }
+
+  if (productName && productId) {
+    const productLink = createBreadcrumbLink(productName, `/product_pages/index.html?product=${productId}`);
+    breadcrumbList.appendChild(productLink);
+  }
+
+  breadcrumbNav.innerHTML = "";
+  breadcrumbNav.appendChild(breadcrumbList);
+}
+
+export function createBreadcrumbLink(text, href) {
+  const link = document.createElement("a");
+  link.href = href;
+  link.textContent = text;
+  const listItem = document.createElement("li");
+  listItem.classList.add("breadcrumb-item"); 
+  listItem.appendChild(link);
+  return listItem;
+}
