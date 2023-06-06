@@ -68,7 +68,7 @@ export class CheckOutProcess {
     <p>Item Total: $${this.itemTotal}</p>
     <p>Shipping: $${this.shipping}</p>
     <p>Tax: $${this.tax.toFixed(2)}</p>
-    <p>Order Total: $${this.orderTotal.toFixed}</p>
+    <p>Order Total: $${this.orderTotal}</p>
     `
     output.innerHTML = orderTemplate;
   }
