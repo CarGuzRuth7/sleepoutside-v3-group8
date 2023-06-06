@@ -1,4 +1,4 @@
-import {getData} from "./productData.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 import { calculateDiscountPercentage } from "./productDetails.mjs";
 

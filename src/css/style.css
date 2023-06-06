@@ -80,8 +80,12 @@ header {
 .highlight {
   color: var(--tertiary-color);
 }
-
-button {
+label,
+input {
+  display: block;
+}
+button,
+#checkoutBtn {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -106,15 +110,39 @@ button {
 #addToCart:hover {
   opacity: 0.7;
 }
-.cart a {
+.cart a,
+.checkoutBtn {
   text-decoration: none;
 }
 
+#checkoutPage {
+  margin-bottom: 2rem;
+}
 .cart svg {
   width: 25px;
 }
 .cart:hover svg {
   fill: gray;
+}
+
+/* checkout form */
+
+#checkoutBtn {
+  margin-top: 1rem;
+}
+form input[type="text"],
+form input[type="number"],
+form input[type="date"] {
+  width: 100%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  font-size: large;
+}
+form input:required:invalid {
+  border-left: solid 5px red;
+}
+form input:required:valid {
+  border-left: solid 5px var(--secondary-color);
 }
 /*animation to cart*/
 
@@ -362,6 +390,17 @@ button {
   }
   .alert-list {
     max-width: 500px;
+  }
+  form {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+  form fieldset[name="payment"] {
+    grid-column: 1/2;
+  }
+  form fieldset[name="orderInfo"] {
+    grid-column: 2/3;
+    grid-row: 1/2;
   }
 }
 

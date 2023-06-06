@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, renderListWithTemplate} from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, renderListWithTemplate, displayTotalItems } from "./utils.mjs";
 
 export default function ShoppingCart() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -20,7 +20,6 @@ export default function ShoppingCart() {
     sum = sum + itemTotal
     }
     setLocalStorage("total-items", sum);
-
   }
 
   cartEl.addEventListener("click", handleRemoveItem);
@@ -74,6 +73,7 @@ export default function ShoppingCart() {
     const cartFooter = document.querySelector(".cart-footer");
     cartFooter.classList.remove("hide");
     cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+    displayTotalItems();
   }
 }
 
