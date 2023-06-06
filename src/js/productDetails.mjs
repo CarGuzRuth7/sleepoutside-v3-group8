@@ -3,10 +3,19 @@ import { setLocalStorage, getLocalStorage, displayTotalItems} from "./utils.mjs"
 import { generateBreadcrumb } from "./utils.mjs";
 
 export default async function productDetails(productId) {
+  try{
     const product = await findProductById(productId);
+    if(!product){
+      throw new SyntaxError("The product you are trying to find is not available.")
+    }
     renderProductDetails(product);
+
     generateBreadcrumb(product.Category, product.Name, productId);
-}
+  } catch (err){
+    let productD = document.querySelector(".product-detail")
+    productD.innerHTML = `<h2>Product Not Found</h2>
+                           <p>${err.message}</p>`
+  }
 
 function addProductToCart(product) {
     const cart = getLocalStorage("so-cart") || [];
