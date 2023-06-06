@@ -65,7 +65,7 @@ export class CheckOutProcess {
 
     const orderTemplate = `
     <legend>Order Summary</legend>
-    <p>Item Total: $${this.itemTotal}</p>
+    <p>Item Total: $${this.itemTotal.toFixed(2)}</p>
     <p>Shipping: $${this.shipping}</p>
     <p>Tax: $${this.tax.toFixed(2)}</p>
     <p>Order Total: $${this.orderTotal.toFixed(2)}</p>
