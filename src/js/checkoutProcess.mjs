@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs"
+import { alertMessage, getLocalStorage } from "./utils.mjs"
 import { checkOut } from "./externalServices.mjs"
 
 function formDataToJSON(formElement) {
@@ -73,6 +73,7 @@ export class CheckOutProcess {
     output.innerHTML = orderTemplate;
   }
   async checkout(form) {
+    try {
 
       // build the data object from the calculated fields, the items in the cart, and the information entered into the form
       const jsonFormData = formDataToJSON(form);
@@ -90,13 +91,21 @@ export class CheckOutProcess {
         body: JSON.stringify(jsonFormData)
       };
 
-      try {
+      
         // make the post request to the server
         const response = await checkOut(options);
-        const data = await response.json();
-        console.log(data);
+        const data = await response;
+
+          //redirect to success page
+          window.location.href = "success.html"
+          localStorage.clear();
+        
       } catch (error) {
-        console.error(error);
+       // alert("Something went wrong: " + error)
+      // alertMessage(error.message);
+       const errorResponse = await error.json();
+       const errorMessage = errorResponse.message
+       alertMessage(errorMessage);
       };
   }
 }
