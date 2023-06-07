@@ -75,14 +75,13 @@ export class CheckOutProcess {
   async checkout(form) {
     try {
 
-      // build the data object from the calculated fields, the items in the cart, and the information entered into the form
       const jsonFormData = formDataToJSON(form);
       jsonFormData.items = packageItems(this.list);
       jsonFormData.orderTotal = this.orderTotal;
       jsonFormData.shipping = this.shipping;
       jsonFormData.tax = this.tax;
+      console.log(jsonFormData)
 
-      // create the options object for the fetch request
       const options = {
         method: "POST",
         headers: {
@@ -91,21 +90,29 @@ export class CheckOutProcess {
         body: JSON.stringify(jsonFormData)
       };
 
-      
-        // make the post request to the server
-        const response = await checkOut(options);
-        const data = await response;
+      // make the post request to the server
+      const response = await checkOut(options);
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
 
-          //redirect to success page
-          window.location.href = "success.html"
-          localStorage.clear();
-        
+      // handle server response
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        const errorMessage = errorResponse.message;
+        alertMessage(errorMessage);
+        return;
+      } 
+      //redirect to success page
+      window.location.href = "success.html"
+      localStorage.clear();
       } catch (error) {
        // alert("Something went wrong: " + error)
       // alertMessage(error.message);
-       const errorResponse = await error.json();
-       const errorMessage = errorResponse.message
-       alertMessage(errorMessage);
+       const errorMessage = error.message
+       console.log(errorMessage)
+
+      alertMessage("An error occurred during checkout: " + errorMessage);
       };
   }
 }

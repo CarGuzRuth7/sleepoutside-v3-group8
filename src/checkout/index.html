@@ -23,11 +23,11 @@
             <legend>Shipping</legend>
             <label>
               First name
-              <input type="text" name="fName" required />
+              <input type="text" name="fname" required />
             </label>
             <label>
               Last name
-              <input type="text" name="lName" required />
+              <input type="text" name="lname" required />
             </label>
             <label>
               Street
@@ -53,6 +53,7 @@
               <input
                 type="number"
                 name="cardNumber"
+                pattern="[0-9]{16}"
                 placeholder="1234123412341234"
                 required
               />

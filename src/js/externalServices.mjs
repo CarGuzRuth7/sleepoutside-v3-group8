@@ -1,14 +1,13 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 async function convertToJson(res) {
-  const response = await res.json();
-  if (res.ok) {
-    return response;
+  let jsonResponse = await res.json();
+  if (jsonResponse.Result || jsonResponse.message) {
+    return jsonResponse;
   } else {
-    throw {
-      name: "ServiceError",
-      message: response 
-    };
+    throw { 
+      name: "servicesError", 
+      message: jsonResponse };
   }
 }
 
@@ -26,7 +25,7 @@ export async function findProductById(id) {
 }
 
 export async function checkOut(payload){
-  const url = `${baseURL}/checkout`;
+  const url = `${baseURL}checkout`;
   const options = {
     method: "POST",
     headers: {
@@ -35,5 +34,6 @@ export async function checkOut(payload){
     body: JSON.stringify(payload)
   };
   const response = await fetch(url, options);
-  return response.json();
+  const json = await convertToJson(response);
+  return json;
 }
