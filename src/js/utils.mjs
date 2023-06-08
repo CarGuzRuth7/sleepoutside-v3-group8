@@ -140,18 +140,19 @@ export function alertMessage(message, scroll = true) {
   const closeBtn = document.createElement("button");
   const msg = document.createElement("p");
 
-  div.classList.add("alert-err");
-  closeBtn.classList.add("close-btn");
+  div.classList.add("alert");
+  closeBtn.classList.add("close-btn-alert");
   closeBtn.innerHTML = "x";
-  msg.innerHTML = message;
 
-  closeBtn.addEventListener("click", () => {
-    div.style.display = "none";
-  });
+  msg.innerHTML = message;
 
   div.appendChild(closeBtn);
   div.appendChild(msg);
   main.prepend(div);
+
+  closeBtn.addEventListener("click", () => {
+    main.removeChild(div);
+  });
 
   // make sure they see the alert by scrolling to the top of the window
   // we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.

@@ -1,4 +1,4 @@
-import { alertMessage, getLocalStorage } from "./utils.mjs"
+import { alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs"
 import { checkOut } from "./externalServices.mjs"
 
 function formDataToJSON(formElement) {
@@ -81,36 +81,39 @@ export class CheckOutProcess {
       jsonFormData.orderTotal = this.orderTotal;
       jsonFormData.shipping = this.shipping;
       jsonFormData.tax = this.tax;
-      console.log(jsonFormData)
+      //console.log(jsonFormData)
 
       // make the post request to the server
       const response = await checkOut(jsonFormData);
       // console.log(response);
-      const data = await response.json();
-      console.log(data);
+      //const data = await response;
+      console.log(response);
 
       // handle server response
       if (!response.ok) {
-        const errorResponse = await response.json();
-        const errorMessage = errorResponse.message;
-        alertMessage(errorMessage);
-        return;
+        throw new Error("Something went wrong during checkout.")
+    
       } 
       //redirect to success page
       window.location.href = "success.html"
-      localStorage.clear();
-      } catch (error) {
-       // alert("Something went wrong: " + error)
-      // alertMessage(error.message);
-      let errorMessage = "An error occurred during checkout.";
+      localStorage.clear()
 
-      if (errorMessage in error) {
-        errorMessage = error[errorMessage];
-      } else if (error.message) {
-        errorMessage = error.message;
-      }
+      } catch (error) {      
+          //iterate through err object
+          if (typeof error.message === "object"){
+            for(const property in error.message){
+            
+              alertMessage(error.message[property]);
+              
+            }
+          }else{
+            alertMessage(error.message)
+          }
+          
+        
+  
       
-      alertMessage(errorMessage);
+      console.log(error)
       };
   }
 }
