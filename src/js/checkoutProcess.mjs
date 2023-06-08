@@ -85,7 +85,7 @@ export class CheckOutProcess {
 
       // make the post request to the server
       const response = await checkOut(jsonFormData);
-      console.log(response);
+      // console.log(response);
       const data = await response.json();
       console.log(data);
 
@@ -102,10 +102,15 @@ export class CheckOutProcess {
       } catch (error) {
        // alert("Something went wrong: " + error)
       // alertMessage(error.message);
-       const errorMessage = error.message
-       console.log(errorMessage)
+      let errorMessage = "An error occurred during checkout.";
 
-      alertMessage("An error occurred during checkout: " + errorMessage);
+      if (errorMessage in error) {
+        errorMessage = error[errorMessage];
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      alertMessage(errorMessage);
       };
   }
 }
