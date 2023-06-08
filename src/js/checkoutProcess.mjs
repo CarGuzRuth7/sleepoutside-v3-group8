@@ -76,22 +76,15 @@ export class CheckOutProcess {
     try {
 
       const jsonFormData = formDataToJSON(form);
+      jsonFormData.orderDate = new Date();
       jsonFormData.items = packageItems(this.list);
       jsonFormData.orderTotal = this.orderTotal;
       jsonFormData.shipping = this.shipping;
       jsonFormData.tax = this.tax;
       console.log(jsonFormData)
 
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(jsonFormData)
-      };
-
       // make the post request to the server
-      const response = await checkOut(options);
+      const response = await checkOut(jsonFormData);
       console.log(response);
       const data = await response.json();
       console.log(data);
