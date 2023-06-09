@@ -1,4 +1,4 @@
-import { alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs"
+import { alertMessage, getLocalStorage } from "./utils.mjs"
 import { checkOut } from "./externalServices.mjs"
 
 function formDataToJSON(formElement) {
@@ -86,34 +86,25 @@ export class CheckOutProcess {
       // make the post request to the server
       const response = await checkOut(jsonFormData);
       // console.log(response);
-      //const data = await response;
-      console.log(response);
-
-      // handle server response
-      if (!response.ok) {
-        throw new Error("Something went wrong during checkout.")
-    
-      } 
-      //redirect to success page
-      window.location.href = "success.html"
-      localStorage.clear()
-
+      if (localStorage.length === 0) {
+        throw new Error("Your cart is empty.");
+      }
+      if (response.message === "Order Placed") {
+        window.location.href = "success.html";
+        localStorage.clear();
+      } else {
+        throw new Error("Something went wrong during checkout.");
+      }
       } catch (error) {      
           //iterate through err object
           if (typeof error.message === "object"){
-            for(const property in error.message){
-            
-              alertMessage(error.message[property]);
-              
+            for(const property in error.message){        
+              alertMessage(error.message[property]);       
             }
-          }else{
+          } else {
             alertMessage(error.message)
           }
-          
-        
-  
-      
-      console.log(error)
+      // console.log(error)
       };
   }
 }
