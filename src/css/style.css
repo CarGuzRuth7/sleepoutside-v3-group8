@@ -393,7 +393,7 @@ form input:required:valid {
   box-shadow: 5px 5px 10px #303030;
   padding: 3rem;
 }
-.close-btn {
+.close-btn,.close-btn-alert {
   position: absolute;
   top: 20px;
   right: 10px;
@@ -401,8 +401,21 @@ form input:required:valid {
   background-color: transparent;
   text-shadow: 1px 1px 3px #000;
 }
-.close-btn:hover {
+.close-btn:hover, .close-btn-alert:hover {
   color: #000;
+}
+
+.alert{
+  background-color: var(--primary-color);
+  border: 2px solid #fe851c;
+  position: relative;
+  margin: .1rem;
+}
+.alert p{
+  margin-left: .5rem;
+}
+.close-btn-alert{
+top: 13px;
 }
 
 @media screen and (min-width: 500px) {

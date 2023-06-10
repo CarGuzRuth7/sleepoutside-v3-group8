@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs"
+import { alertMessage, getLocalStorage } from "./utils.mjs"
 import { checkOut } from "./externalServices.mjs"
 
 function formDataToJSON(formElement) {
@@ -73,30 +73,38 @@ export class CheckOutProcess {
     output.innerHTML = orderTemplate;
   }
   async checkout(form) {
+    try {
 
-      // build the data object from the calculated fields, the items in the cart, and the information entered into the form
       const jsonFormData = formDataToJSON(form);
+      jsonFormData.orderDate = new Date();
       jsonFormData.items = packageItems(this.list);
       jsonFormData.orderTotal = this.orderTotal;
       jsonFormData.shipping = this.shipping;
       jsonFormData.tax = this.tax;
+      //console.log(jsonFormData)
 
-      // create the options object for the fetch request
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(jsonFormData)
-      };
-
-      try {
-        // make the post request to the server
-        const response = await checkOut(options);
-        const data = await response.json();
-        console.log(data);
-      } catch (error) {
-        console.error(error);
+      // make the post request to the server
+      const response = await checkOut(jsonFormData);
+      // console.log(response);
+      if (localStorage.length === 0) {
+        throw new Error("Your cart is empty.");
+      }
+      if (response.message === "Order Placed") {
+        window.location.href = "success.html";
+        localStorage.clear();
+      } else {
+        throw new Error("Something went wrong during checkout.");
+      }
+      } catch (error) {      
+          //iterate through err object
+          if (typeof error.message === "object"){
+            for(const property in error.message){        
+              alertMessage(error.message[property]);       
+            }
+          } else {
+            alertMessage(error.message)
+          }
+      // console.log(error)
       };
   }
 }
