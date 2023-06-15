@@ -201,7 +201,7 @@ input[type="password"] {
   font-weight: bold;
 }
 
-.banner a:hover{
+.banner a:hover {
   transform: scale(1.1);
 }
 /*animation to cart*/
@@ -493,7 +493,7 @@ td {
   padding: 5px;
 }
 
-th{
+th {
   background-color: var(--secondary-color);
   color: white;
 }
