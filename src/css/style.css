@@ -144,6 +144,44 @@ form input:required:invalid {
 form input:required:valid {
   border-left: solid 5px var(--secondary-color);
 }
+
+/* login page */
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  margin: 0;
+}
+
+#login-form {
+  display: block;
+  background-color: var(--light-grey);
+  padding: 20px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 20px 0;
+  display: inline-block;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+}
+
+#login-form input[type="submit"] {
+  width: 100%;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /*animation to cart*/
 
 .add-to-cart {
@@ -393,7 +431,8 @@ form input:required:valid {
   box-shadow: 5px 5px 10px #303030;
   padding: 3rem;
 }
-.close-btn,.close-btn-alert {
+.close-btn,
+.close-btn-alert {
   position: absolute;
   top: 20px;
   right: 10px;
@@ -401,21 +440,22 @@ form input:required:valid {
   background-color: transparent;
   text-shadow: 1px 1px 3px #000;
 }
-.close-btn:hover, .close-btn-alert:hover {
+.close-btn:hover,
+.close-btn-alert:hover {
   color: #000;
 }
 
-.alert{
+.alert {
   background-color: var(--primary-color);
   border: 2px solid #fe851c;
   position: relative;
-  margin: .1rem;
+  margin: 0.1rem;
 }
-.alert p{
-  margin-left: .5rem;
+.alert p {
+  margin-left: 0.5rem;
 }
-.close-btn-alert{
-top: 13px;
+.close-btn-alert {
+  top: 13px;
 }
 
 @media screen and (min-width: 500px) {
