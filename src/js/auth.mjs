@@ -9,17 +9,19 @@ export async function login(creds, redirect = "/") {
     const token = await loginRequest(creds);
     setLocalStorage(tokenKey, token);
     window.location = redirect;
-  } catch (err) {
-    alertMessage(err.message.message);
+    window.location = "/orders/index.html"; 
+  } catch {
+    alertMessage("Incorrect username or password");
   }
 }
+
 
 export function checkLogin() {
   const token = getLocalStorage(tokenKey);
   const valid = isTokenValid(token);
   if (!valid) {
     localStorage.removeItem(tokenKey);
-    const location = window.location;
+    const location = window.location.href;
     window.location = `/login/index.html?redirect=${location.pathname}`;
   } else {
     return token;
@@ -31,10 +33,10 @@ export function isTokenValid(token) {
     const decoded = jwt_decode(token);
     let currentDate = new Date();
     if (decoded.exp * 1000 < currentDate.getTime()) {
-      console.log("Token expired.");
+      // console.log("Token expired.");
       return false;
     } else {
-      console.log("Valid token");
+      // console.log("Valid token");
       return true;
     }
   } else {
