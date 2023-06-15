@@ -151,7 +151,7 @@ form input:required:valid {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40vh;
+  height: 30rem;
   margin: 0;
 }
 
