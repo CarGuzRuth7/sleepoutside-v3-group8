@@ -48,17 +48,22 @@ export async function loginRequest(creds){
   if (!response.ok){
     throw new Error("Login failed.")
   }
-  const data = await response.json()
-  return data.token
+  const data = await response.json();
+  return data.accessToken;
 }
 
 export async function getOrders(token) {
+  const url = `${baseURL}orders`;
   const options = {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await fetch(baseURL + "orders", options).then(convertToJson);
-  return response;
+  const response = await fetch(url, options);
+  if (!response.ok){
+    throw new Error("Login failed.")
+  }
+  // console.log(response);
+  return response.json();
 }

@@ -12,20 +12,23 @@
 
     <script src="/js/login.js" type="module"></script>
   </head>
-<body>
+  <body>
     <header class="divider" id="main-header"></header>
     <main>
+      <div class="loginContainer">
         <form method="post" id="login-form">
-            <label> email (username)
-                <input name="email" type="email" value="user1@email.com" required>
-            </label>
-            <label> password
-                <input name="password" type="password" required>
-            </label>
-            <input type="submit">
+          <label>
+            email (username)
+            <input name="email" type="email" value="user1@email.com" required />
+          </label>
+          <label>
+            password
+            <input name="password" type="password" required />
+          </label>
+          <input type="submit" />
         </form>
-
+      </div>
     </main>
     <footer>&copy;NOT a real business</footer>
-</body>
+  </body>
 </html>

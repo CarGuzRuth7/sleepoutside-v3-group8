@@ -1,4 +1,4 @@
-import { alertMessage, getLocalStorage } from "./utils.mjs"
+import { alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs"
 import { checkOut } from "./externalServices.mjs"
 
 function formDataToJSON(formElement) {
@@ -91,7 +91,8 @@ export class CheckOutProcess {
       }
       if (response.message === "Order Placed") {
         window.location.href = "success.html";
-        localStorage.clear();
+        // localStorage.clear();
+        setLocalStorage("so-cart", []);
       } else {
         throw new Error("Something went wrong during checkout.");
       }
