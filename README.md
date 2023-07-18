@@ -1,6 +1,5 @@
-Main URL: `https://stunning-tanuki-5f3111.netlify.app/`
-
-(https://dancing-shortbread-fcc5e6.netlify.app/)
+Main URL: <br>
+https://sleep-outside.netlify.app/
 
 # sleepoutside
 
