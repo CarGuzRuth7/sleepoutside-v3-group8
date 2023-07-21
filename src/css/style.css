@@ -262,7 +262,8 @@ input[type="password"] {
 .product-list {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: left;
+  justify-items: center;
   list-style-type: none;
   padding: 0;
 }
@@ -451,7 +452,8 @@ input[type="password"] {
 .alert-list p {
   border-radius: 10px;
   box-shadow: 5px 5px 10px #303030;
-  padding: 3rem;
+  padding: 1rem;
+  font-size: small;
 }
 .close-btn,
 .close-btn-alert {
@@ -512,6 +514,9 @@ th {
   }
   .alert-list {
     max-width: 500px;
+  }
+  .alert-list p {
+    font-size:medium;
   }
   form {
     display: grid;
